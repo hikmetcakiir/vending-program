@@ -1,0 +1,6 @@
+.radio-button{
+    -fx-padding: 0 0 0 88;
+}
+.button{
+    -fx-pref-height: 28px; -fx-pref-width: 130px;
+}
