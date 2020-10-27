@@ -3,9 +3,11 @@ package com.hikmetcakir.vendingprogram.controller;
 import com.hikmetcakir.vendingprogram.domain.BuyOperationService;
 import com.hikmetcakir.vendingprogram.domain.helper.GeneralHelper;
 import com.hikmetcakir.vendingprogram.domain.helper.MoneyOperationHelper;
+import com.hikmetcakir.vendingprogram.model.Product;
 import com.hikmetcakir.vendingprogram.model.User;
 import com.hikmetcakir.vendingprogram.model.Vending;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -28,6 +30,8 @@ public class MainWindowController {
     private TextField userSumMoneyTextField;
     @FXML
     private Label vendingSumMoneyLabel;
+    @FXML
+    private Button userSumMoneyButton;
 
     private User user;
     private Vending vending;
@@ -36,11 +40,16 @@ public class MainWindowController {
     public MainWindowController(){
         user = new User();
         vending = new Vending(new BigDecimal(0));
-        buyOperationService = new BuyOperationService(vending);
+        buyOperationService = new BuyOperationService();
     }
 
     public void buyButtonAction(){
-        System.out.println("Coca cola is seleceted :"+cocaColaRadioButton.isSelected());
+        Product product;
+        if(cocaColaRadioButton.isSelected()) product = new Product("coca-cola",new BigDecimal(15));
+        else if(fantaRadioButton.isSelected()) product = new Product("fanta",new BigDecimal(20));
+        else product = new Product("gazoz",new BigDecimal(30));
+        buyOperationService.buyProduct(user,product,vending);
+        vendingSumMoneyLabel.setText(vending.getMoneyAmount().toString());
     }
 
     public void addMoneyToVending() {
@@ -51,8 +60,11 @@ public class MainWindowController {
         acknowledgedMoneyList.add(new BigDecimal(10));
 
         if(MoneyOperationHelper.validationAddedMoneyToVending(addMoneyToVendingTextField.getText(),acknowledgedMoneyList)){
-            vending.setMoneyAmount(vending.getMoneyAmount().add(GeneralHelper.convertToBigDecimal(addMoneyToVendingTextField.getText())));
-            vendingSumMoneyLabel.setText(vending.getMoneyAmount().toString());
+            if(MoneyOperationHelper.isUserMoneyEnough(user,GeneralHelper.convertToBigDecimal(addMoneyToVendingTextField.getText()))){
+                vending.setMoneyAmount(vending.getMoneyAmount().add(GeneralHelper.convertToBigDecimal(addMoneyToVendingTextField.getText())));
+                vendingSumMoneyLabel.setText(vending.getMoneyAmount().toString());
+                user.setMoneyAmount(user.getMoneyAmount().subtract(GeneralHelper.convertToBigDecimal(addMoneyToVendingTextField.getText())));
+            }
         }
     }
 
@@ -66,7 +78,28 @@ public class MainWindowController {
             addMoneyToVendingTextField.setDisable(false);
             addMoneyToVendingTextField.setText("");
             vendingSumMoneyLabel.setText("0");
+            userSumMoneyButton.setVisible(false);
         }
+    }
+
+    public void resetVending(){
+        userSumMoneyButton.setVisible(true);
+        userSumMoneyTextField.setText("");
+        addMoneyToVendingTextField.setText("");
+        vending.setMoneyAmount(new BigDecimal(0));
+    }
+
+    public void cocaColaSelected(){
+            sodaRadioButton.setSelected(false);
+            fantaRadioButton.setSelected(false);
+    }
+    public void fantaSelected(){
+        sodaRadioButton.setSelected(false);
+        cocaColaRadioButton.setSelected(false);
+    }
+    public void sodaSelected(){
+        fantaRadioButton.setSelected(false);
+        cocaColaRadioButton.setSelected(false);
     }
 
 }

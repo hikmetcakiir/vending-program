@@ -18,16 +18,18 @@
             </ImageView>
         </graphic>
     </Label>
-    <RadioButton fx:id="cocaColaRadioButton" GridPane.rowIndex="1" GridPane.columnIndex="4"  />
+    <Label GridPane.rowIndex="1" GridPane.columnIndex="4" text="Coca Cola (15₺) " style="-fx-padding: 0 0 0 60;"/>
+    <RadioButton fx:id="cocaColaRadioButton" onAction="#cocaColaSelected" GridPane.rowIndex="2" GridPane.columnIndex="4" selected="true" />
 
-    <Label GridPane.rowIndex="0" GridPane.columnIndex="5">
+    <Label GridPane.rowIndex="0" GridPane.columnIndex="5" >
         <graphic>
             <ImageView>
                 <Image url="@/resources/image/camlica-gazoz.png"/>
             </ImageView>
         </graphic>
     </Label>
-    <RadioButton fx:id="sodaRadioButton" GridPane.rowIndex="1" GridPane.columnIndex="5" />
+    <Label GridPane.rowIndex="1" GridPane.columnIndex="5" text="Gazoz (30₺)" style="-fx-padding: 0 0 0 60;"/>
+    <RadioButton fx:id="sodaRadioButton" onAction="#sodaSelected" GridPane.rowIndex="2" GridPane.columnIndex="5" />
 
     <Label GridPane.rowIndex="0" GridPane.columnIndex="6">
         <graphic>
@@ -36,7 +38,8 @@
             </ImageView>
         </graphic>
     </Label>
-    <RadioButton fx:id="fantaRadioButton" GridPane.rowIndex="1" GridPane.columnIndex="6"/>
+    <Label GridPane.rowIndex="1" GridPane.columnIndex="6" text="Fanta (20₺)" style="-fx-padding: 0 0 0 60;"/>
+    <RadioButton fx:id="fantaRadioButton" onAction="#fantaSelected" GridPane.rowIndex="2" GridPane.columnIndex="6" />
 
     <Button GridPane.rowIndex="3" GridPane.columnIndex="4" text="Satın Al" onAction="#buyButtonAction"/>
     <Label GridPane.rowIndex="5" GridPane.columnIndex="4" text="Para Ekle :"/>
@@ -46,9 +49,11 @@
 
     <Label GridPane.rowIndex="7" GridPane.columnIndex="4" text="Otomattaki Mevcut Paranız :"/>
     <Label fx:id="vendingSumMoneyLabel" GridPane.rowIndex="7" GridPane.columnIndex="5" text="Toplam Paranızı Girin" />
-    <Button GridPane.rowIndex="7" GridPane.columnIndex="6" text="İşlemi Sonlandır" onAction="#finishToOperation"/>
+    <Button GridPane.rowIndex="7" GridPane.columnIndex="6" text="İşlemi Sonlandır" onAction="#finishToOperation" />
 
     <Label GridPane.rowIndex="8" GridPane.columnIndex="4" text="Toplam Paranız :"/>
     <TextField fx:id="userSumMoneyTextField" GridPane.rowIndex="8" GridPane.columnIndex="5" />
-    <Button GridPane.rowIndex="8" GridPane.columnIndex="6" text="Tamam" onAction="#sumUserMoney"/>
+    <Button fx:id="userSumMoneyButton" GridPane.rowIndex="8" GridPane.columnIndex="6" text="Tamam" onAction="#sumUserMoney"/>
+
+    <Button GridPane.rowIndex="8" GridPane.columnIndex="8" text="RESET" onAction="#resetVending"/>
 </GridPane>
