@@ -16,12 +16,16 @@ public class BuyOperationService {
         this.userOperationService = new UserOperationService();
     }
 
-    public void buyProduct(User user, Product product,Vending vending){
+    public boolean buyProduct(User user, Product product,Vending vending){
         if(MoneyOperationHelper.isVendingMoneyEnough(vending,product.getPrice())){
-            //productOperationService.updateProductAmounts(product.getName(),vending);
             vending.setMoneyAmount(vending.getMoneyAmount().subtract(product.getPrice()));
-            userOperationService.decreaseUserMoneyAmount(user,product.getPrice());
+            if(!userOperationService.validateDoesUserHaveProduct(user,product))
+                user.getBoughtProductCounts().put(product.getName(),1L);
+            else
+                user.setBoughtProductCounts(productOperationService.updateProductAmounts(product.getName(),vending));
+            return true;
         }
+        return false;
     }
 
 }

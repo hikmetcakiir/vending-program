@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("ui/MainWindow.fxml"));
         primaryStage.setTitle("Otomat Makinesi");
-        primaryStage.setScene(new Scene(root, 1024, 512));
+        primaryStage.setScene(new Scene(root, 1084, 574));
         primaryStage.show();
     }
 
