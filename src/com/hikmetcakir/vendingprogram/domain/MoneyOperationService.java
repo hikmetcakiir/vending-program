@@ -31,7 +31,6 @@ public class MoneyOperationService {
         Ini confReader = new Ini();
         try{ confReader.load(new FileReader("./src/resources/configuration/config.ini")); }
         catch (Exception exception){ System.out.println("Configuration File Path Not Found!"); }
-
         String acknowledgedMoney = confReader.get("information","acknowledged-money");
         List<String> parsedAcknowledgedMoneyList = GeneralHelper.parseToStringList(acknowledgedMoney);
         List<BigDecimal> acknowledgedMoneyList = new ArrayList<>();

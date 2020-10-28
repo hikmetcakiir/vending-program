@@ -45,4 +45,17 @@ public class MoneyOperationHelper {
         }
         return moneyEqualControlValue;
     }
+
+    public static boolean isEqualValue(BigDecimal incomingValue,BigDecimal compareValue){
+        if(incomingValue.compareTo(compareValue) == 0)
+            return true;
+        return false;
+    }
+
+    public static boolean doesUserHaveMoneyInVending(String incomingValue){
+        if(MoneyOperationHelper.isEqualValue(new BigDecimal(incomingValue),new BigDecimal(0)) )
+            return false;
+        return true;
+    }
+
 }

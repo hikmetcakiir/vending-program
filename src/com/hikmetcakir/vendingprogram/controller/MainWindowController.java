@@ -1,6 +1,7 @@
 package com.hikmetcakir.vendingprogram.controller;
 
-import com.hikmetcakir.vendingprogram.domain.*; 
+import com.hikmetcakir.vendingprogram.domain.*;
+import com.hikmetcakir.vendingprogram.domain.helper.GeneralHelper;
 import com.hikmetcakir.vendingprogram.domain.helper.MoneyOperationHelper;
 import com.hikmetcakir.vendingprogram.model.Product;
 import com.hikmetcakir.vendingprogram.model.User;
@@ -27,6 +28,9 @@ public class MainWindowController {
     @FXML private Label fantaAmountLabel;
     @FXML private Label vendingSumMoneyLabel;
     @FXML private Label sodaAmountLabel;
+    @FXML private Label cocaColaNamePriceLabel;
+    @FXML private Label fantaNamePriceLabel;
+    @FXML private Label sodaNamePriceLabel;
     @FXML private TextField addMoneyToVendingTextField;
     @FXML private TextField userSumMoneyTextField;
 
@@ -51,6 +55,7 @@ public class MainWindowController {
         Product product;
         List<BigDecimal> productPriceList = productOperationService.getProductPriceFromConfFile();
         List<String> productNameList = productOperationService.getProductNameFromConfFile();
+
         if(cocaColaRadioButton.isSelected()) product = new Product(productNameList.get(0),productPriceList.get(0));
         else if(fantaRadioButton.isSelected()) product = new Product(productNameList.get(1),productPriceList.get(1));
         else product = new Product(productNameList.get(2),productPriceList.get(2));
@@ -60,13 +65,14 @@ public class MainWindowController {
             displayUpdatedAmountProduct();
             NotificationService.showSuccessNotification("Ürün başarıyla satın alındı!");
         }else
-            NotificationService.showErrorNotification("Malesef yeteri kadar paranız bulunmamaktadır!");
+            NotificationService.showErrorNotification("Malesef ürün satın alınamadı!");
 
+        if(!MoneyOperationHelper.doesUserHaveMoneyInVending(vendingSumMoneyLabel.getText()))
+            finishToOperation();
     }
 
     public void addMoneyToVending() {
-        List<BigDecimal> acknowledgedMoneyList = moneyOperationService.getAcknowledgedMoneyList();
-        if(moneyOperationService.addMoneyToVending(user,addMoneyToVendingTextField.getText(),acknowledgedMoneyList,vending)) {
+        if(moneyOperationService.addMoneyToVending(user,addMoneyToVendingTextField.getText(),moneyOperationService.getAcknowledgedMoneyList(),vending)) {
             vendingSumMoneyLabel.setText(vending.getMoneyAmount().toString());
             userSumMoneyTextField.setText(user.getMoneyAmount().toString());
         }
@@ -83,12 +89,14 @@ public class MainWindowController {
     public void sumUserMoney(){
         if(MoneyOperationHelper.validationAddedMoney(userSumMoneyTextField.getText())){
             user.setMoneyAmount(new BigDecimal(userSumMoneyTextField.getText()));
-            addMoneyToVendingTextField.setDisable(false);
             addMoneyToVendingTextField.setText("0");
             vendingSumMoneyLabel.setText("0");
             userSumMoneyButton.setVisible(false);
             openSystemInput();
+            userSumMoneyTextField.setDisable(true);
             displayUpdatedAmountProduct();
+            finishToOperationButton.setVisible(true);
+            displayProductPrice();
         }
     }
     public void resetVending(){
@@ -97,8 +105,10 @@ public class MainWindowController {
         addMoneyToVendingTextField.setText("Toplam Paranızı Girin");
         vendingSumMoneyLabel.setText("Toplam Paranızı Girin");
         vending.setMoneyAmount(new BigDecimal(0));
+        user.setBoughtProductCounts(new HashMap<>());
         vending.setProductAmounts(productOperationService.createProductCounts());
         displayUpdatedAmountProduct();
+        userSumMoneyTextField.setDisable(false);
         closeSystemInput();
     }
     public void openSystemInput(){
@@ -118,6 +128,12 @@ public class MainWindowController {
         cocaColaRadioButton.setSelected(true);
         fantaRadioButton.setSelected(false);
         sodaRadioButton.setSelected(false);
+    }
+    public void displayProductPrice(){
+        List<BigDecimal> priceList = productOperationService.getProductPriceFromConfFile();
+        fantaNamePriceLabel.setText("Fanta ("+priceList.get(1).toString()+"₺)");
+        cocaColaNamePriceLabel.setText("Coca Cola ("+priceList.get(0).toString()+"₺)");
+        sodaNamePriceLabel.setText("Gazoz ("+priceList.get(2).toString()+"₺)");
     }
     public void displayUpdatedAmountProduct(){
         cocaColaAmountLabel.setText("Adet : "+vending.getProductAmounts().get("coca-cola"));

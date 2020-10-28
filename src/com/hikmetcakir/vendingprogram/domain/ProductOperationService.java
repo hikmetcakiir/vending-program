@@ -1,6 +1,8 @@
 package com.hikmetcakir.vendingprogram.domain;
 
 import com.hikmetcakir.vendingprogram.domain.helper.GeneralHelper;
+import com.hikmetcakir.vendingprogram.model.Product;
+import com.hikmetcakir.vendingprogram.model.User;
 import com.hikmetcakir.vendingprogram.model.Vending;
 import org.ini4j.Ini;
 
@@ -75,4 +77,11 @@ public class ProductOperationService {
         catch (Exception exception){ System.out.println("Configuration File Path Not Found!"); }
     }
 
+    public boolean doesUserHaveProduct(User user, Product product){
+        Map<String, Long> boughtProductCounts = user.getBoughtProductCounts();
+        for(Map.Entry<String, Long> boughtProduct : boughtProductCounts.entrySet())
+            if(boughtProduct.getKey().equals(product.getName()))
+                return true;
+        return false;
+    }
 }

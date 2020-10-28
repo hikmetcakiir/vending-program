@@ -10,7 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
-import java.util.Map;
 
 public class NotificationService {
 
