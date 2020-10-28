@@ -16,5 +16,5 @@
     -fx-text-fill: black;
 }
 .button:pressed {
-    -fx-background-color: blue; 
+    -fx-background-color: blue;
 }

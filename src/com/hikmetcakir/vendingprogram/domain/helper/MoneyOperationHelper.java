@@ -36,6 +36,7 @@ public class MoneyOperationHelper {
                     return  true;
         return  false;
     }
+
     private static boolean validationAddedMoneyToVending(BigDecimal addedMoney, List<BigDecimal> moneyAmountList){
         boolean moneyEqualControlValue = false;
         for(BigDecimal moneyAmount : moneyAmountList){

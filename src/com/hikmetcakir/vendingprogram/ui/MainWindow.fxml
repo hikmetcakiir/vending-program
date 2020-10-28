@@ -14,7 +14,7 @@
     <Label GridPane.rowIndex="0" GridPane.columnIndex="4">
         <graphic>
             <ImageView>
-                <Image url="@/resources/image/coca-cola.png"/>
+                <Image url="@/resources/image/main-frame-img/coca-cola.png"/>
             </ImageView>
         </graphic>
     </Label>
@@ -26,7 +26,7 @@
     <Label GridPane.rowIndex="0" GridPane.columnIndex="5" >
         <graphic>
             <ImageView>
-                <Image url="@/resources/image/camlica-gazoz.png"/>
+                <Image url="@/resources/image/main-frame-img/camlica-gazoz.png"/>
             </ImageView>
         </graphic>
     </Label>
@@ -37,7 +37,7 @@
     <Label GridPane.rowIndex="0" GridPane.columnIndex="6">
         <graphic>
             <ImageView>
-                <Image url="@/resources/image/fanta-image.png"/>
+                <Image url="@/resources/image/main-frame-img/fanta-image.png"/>
             </ImageView>
         </graphic>
     </Label>
