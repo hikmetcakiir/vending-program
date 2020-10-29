@@ -31,7 +31,7 @@ public class BuyOperationService {
                 }
              return true;
             }else
-                return false;
+             return false;
         }
         return false;
     }
@@ -50,7 +50,6 @@ public class BuyOperationService {
             }
         else
             stringBuilder.append("Malesef hiçbir ürün almadınız!");
-
         return stringBuilder.toString();
     }
 

@@ -1,9 +1,6 @@
 package com.hikmetcakir.vendingprogram.domain;
 
-import com.hikmetcakir.vendingprogram.domain.helper.GeneralHelper;
 import com.hikmetcakir.vendingprogram.model.User;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,11 +8,12 @@ import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
 
+
 public class NotificationService {
 
-    private static final String SUCCESS_IMG_PATH = "./resources/image/notification-img/success-img.png";
-    private static final String ERROR_IMG_PATH = "./resources/image/notification-img/error-img.png";
-    private static final String INFORMATION_IMG_PATH = "./resources/image/notification-img/information-img.png";
+    private static final String SUCCESS_IMG_PATH = "/resources/image/notification-img/success-img.png";
+    private static final String ERROR_IMG_PATH = "/resources/image/notification-img/error-img.png";
+    private static final String INFORMATION_IMG_PATH = "/resources/image/notification-img/information-img.png";
 
     public static void showSuccessNotification(String successMessage){
         Notifications notificationBuilder = Notifications.create()

@@ -6,7 +6,8 @@ import com.hikmetcakir.vendingprogram.model.User;
 import com.hikmetcakir.vendingprogram.model.Vending;
 import org.ini4j.Ini;
 
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +17,7 @@ import java.util.Map;
 public class ProductOperationService {
 
     private Ini confReader;
-    private static final String CONFIGURATION_FILE_PATH = "./src/resources/configuration/config.ini";
+    private static final String CONFIGURATION_FILE_PATH = "/resources/configuration/config.ini";
 
     public ProductOperationService(){
         confReader = new Ini();
@@ -73,7 +74,8 @@ public class ProductOperationService {
     }
 
     private void loadConfigurationReader(){
-        try{confReader.load(new FileReader(CONFIGURATION_FILE_PATH)); }
+        InputStream url = this.getClass().getResourceAsStream(CONFIGURATION_FILE_PATH);
+        try{confReader.load(new InputStreamReader(url)); }
         catch (Exception exception){ System.out.println("Configuration File Path Not Found!"); }
     }
 

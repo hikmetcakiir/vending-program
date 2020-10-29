@@ -6,7 +6,8 @@ import com.hikmetcakir.vendingprogram.model.User;
 import com.hikmetcakir.vendingprogram.model.Vending;
 import org.ini4j.Ini;
 
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,8 @@ public class MoneyOperationService {
 
     public List<BigDecimal> getAcknowledgedMoneyList(){
         Ini confReader = new Ini();
-        try{ confReader.load(new FileReader("./src/resources/configuration/config.ini")); }
+        InputStream url = this.getClass().getResourceAsStream("/resources/configuration/config.ini");
+        try{ confReader.load(new InputStreamReader(url)); }
         catch (Exception exception){ System.out.println("Configuration File Path Not Found!"); }
         String acknowledgedMoney = confReader.get("information","acknowledged-money");
         List<String> parsedAcknowledgedMoneyList = GeneralHelper.parseToStringList(acknowledgedMoney);

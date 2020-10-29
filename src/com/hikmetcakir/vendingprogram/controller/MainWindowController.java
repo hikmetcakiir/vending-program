@@ -1,7 +1,6 @@
 package com.hikmetcakir.vendingprogram.controller;
 
 import com.hikmetcakir.vendingprogram.domain.*;
-import com.hikmetcakir.vendingprogram.domain.helper.GeneralHelper;
 import com.hikmetcakir.vendingprogram.domain.helper.MoneyOperationHelper;
 import com.hikmetcakir.vendingprogram.model.Product;
 import com.hikmetcakir.vendingprogram.model.User;
