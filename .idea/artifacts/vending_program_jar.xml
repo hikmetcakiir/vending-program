@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="vending-program:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/vending_program_jar</output-path>
+    <root id="archive" name="vending-program.jar">
+      <element id="module-output" name="vending-program" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/ini4j-0.5.4-bin/ini4j-0.5.4/ini4j-0.5.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Desktop/jar/controlsfx-8.40.12.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
