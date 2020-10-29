@@ -16,22 +16,20 @@ import java.util.List;
 
 
 public class MainWindowController {
-    @FXML private Button userSumMoneyButton;
-    @FXML private Button addMoneyToVendingButton;
-    @FXML private Button buyButton;
-    @FXML private Button finishToOperationButton;
+    @FXML private Button userSumMoneyButton;    @FXML private Button addMoneyToVendingButton;
+    @FXML private Button buyButton;             @FXML private Button finishToOperationButton;
+
+    @FXML private Label fantaAmountLabel;       @FXML private Label vendingSumMoneyLabel;
+    @FXML private Label sodaAmountLabel;        @FXML private Label cocaColaNamePriceLabel;
+    @FXML private Label fantaNamePriceLabel;    @FXML private Label sodaNamePriceLabel;
+    @FXML private Label cocaColaAmountLabel;
+
     @FXML private RadioButton sodaRadioButton;
     @FXML private RadioButton cocaColaRadioButton;
     @FXML private RadioButton fantaRadioButton;
-    @FXML private Label cocaColaAmountLabel;
-    @FXML private Label fantaAmountLabel;
-    @FXML private Label vendingSumMoneyLabel;
-    @FXML private Label sodaAmountLabel;
-    @FXML private Label cocaColaNamePriceLabel;
-    @FXML private Label fantaNamePriceLabel;
-    @FXML private Label sodaNamePriceLabel;
-    @FXML private TextField addMoneyToVendingTextField;
+
     @FXML private TextField userSumMoneyTextField;
+    @FXML private TextField addMoneyToVendingTextField;
 
     private User user;
     private Vending vending;
@@ -49,7 +47,6 @@ public class MainWindowController {
         HashMap<String ,Long> productHashMapList = productOperationService.createProductCounts();
         vending.setProductAmounts(productHashMapList);
     }
-
     public void buyButtonAction(){
         Product product;
         List<BigDecimal> productPriceList = productOperationService.getProductPriceFromConfFile();
@@ -69,7 +66,6 @@ public class MainWindowController {
         if(!MoneyOperationHelper.doesUserHaveMoneyInVending(vendingSumMoneyLabel.getText()))
             finishToOperation();
     }
-
     public void addMoneyToVending() {
         if(moneyOperationService.addMoneyToVending(user,addMoneyToVendingTextField.getText(),moneyOperationService.getAcknowledgedMoneyList(),vending)) {
             vendingSumMoneyLabel.setText(vending.getMoneyAmount().toString());
@@ -82,7 +78,7 @@ public class MainWindowController {
         addMoneyToVendingTextField.setText("0");
         vendingSumMoneyLabel.setText(vending.getMoneyAmount().toString());
         userSumMoneyTextField.setText(user.getMoneyAmount().toString());
-        NotificationService.showSuccessNotification("Yine Bekleriz. (^-^)");
+        NotificationService.showSuccessNotification("Yine Bekleriz. (^-^) ");
         NotificationService.showUserBoughtProduct(user);
     }
     public void sumUserMoney(){

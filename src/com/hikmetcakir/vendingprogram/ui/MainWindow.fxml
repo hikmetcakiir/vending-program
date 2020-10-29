@@ -53,7 +53,8 @@
 
     <Label GridPane.rowIndex="10" GridPane.columnIndex="4" text="Otomattaki Mevcut Paranız :"/>
     <Label fx:id="vendingSumMoneyLabel" GridPane.rowIndex="10" GridPane.columnIndex="5" text="Toplam Paranızı Girin" />
-    <Button fx:id="finishToOperationButton" GridPane.rowIndex="10" GridPane.columnIndex="6" disable="true" text="İşlemi Sonlandır" onAction="#finishToOperation"  />
+    <Button fx:id="finishToOperationButton" GridPane.rowIndex="10" GridPane.columnIndex="6" disable="true"
+            text="İşlemi Sonlandır" onAction="#finishToOperation" style="-fx-font-size: 14;" />
 
     <Label GridPane.rowIndex="11" GridPane.columnIndex="4" text="Toplam Paranız :"/>
     <TextField fx:id="userSumMoneyTextField" GridPane.rowIndex="11" GridPane.columnIndex="5" text="0"/>
